@@ -6,10 +6,7 @@ import {
   RouterStateSnapshot,
 } from '@angular/router';
 import { AuthService } from '../_services/auth.service';
-import { BootstrapService } from '../_services/bootstrap.service';
-import { Menu } from '../_model/menu';
-import { Subscription } from 'rxjs';
-
+import { Staff } from '../_model/staff';
 @Injectable({ providedIn: 'root' })
 export class AuthGuard implements CanActivate {
   accountAdmin = ['admin'];
@@ -37,7 +34,7 @@ export class AuthGuard implements CanActivate {
     return false;
   }
 
-  isAdminAccount(currentUser: any) {
+  isAdminAccount(currentUser: Staff) {
     return this.accountAdmin.indexOf(currentUser['user']) !== -1;
   }
 }
