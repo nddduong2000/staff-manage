@@ -1,10 +1,15 @@
 import { Component } from '@angular/core';
+import { BootstrapService } from './_services/bootstrap.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-  title = 'staff-manage';
+  constructor(private bootstrap: BootstrapService) {
+    console.log('11111');
+    
+    this.bootstrap.loadBootstrap();
+  }
 }

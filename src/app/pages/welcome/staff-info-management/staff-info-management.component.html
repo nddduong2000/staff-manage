@@ -1,0 +1,31 @@
+<h2>Quản lý nhân viên</h2>
+
+
+<button nz-button nzType="primary" nzGhost (click)="addNewStaff()" class="mt-2">
+  Thêm mới
+</button>
+
+<nz-table #sortTable [nzData]="listOfData" nzTableLayout="fixed" class="mt-5">
+  <thead>
+    <tr>
+      <th
+        *ngFor="let column of listOfColumn"
+        [nzSortFn]="column.compare"
+        [nzSortPriority]="column.priority"
+      >
+        {{ column.title }}
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let data of sortTable.data">
+      <td>{{ data.nickname }}</td>
+      <td>{{ data.user }}</td>
+      <td>{{ data.email }}</td>
+      <td>{{ data.phoneNumber }}</td>
+      <td>{{ data.password }}</td>
+    </tr>
+  </tbody>
+</nz-table>
+
+<create-update-staff-info [isVisible]="isVisible" *ngIf="isVisible" (callback)="closeModal()"></create-update-staff-info>

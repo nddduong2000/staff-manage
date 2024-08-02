@@ -1,0 +1,97 @@
+<nz-modal
+  [(nzVisible)]="isVisible"
+  nzTitle="Thêm nhân viên"
+  (nzOnCancel)="handleCancel()"
+  nzWidth="800px"
+>
+  <div *nzModalContent>
+    <form nz-form [formGroup]="validateForm">
+      <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="email">E-mail</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Email không đúng định dạng!">
+          <input nz-input formControlName="email" id="email" nzSize="large"/>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="user">Tên tài khoản</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Vui lòng nhập tên tài khoản!">
+          <input nz-input formControlName="user" id="user" nzSize="large"/>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="password" nzRequired>Mật khẩu</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Vui lòng nhập mật khẩu!">
+          <input
+            nz-input
+            type="password"
+            id="password"
+            formControlName="password"
+            (ngModelChange)="updateConfirmValidator()"
+            nzSize="large"
+          />
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="checkPassword" nzRequired>Nhập lại mật khẩu</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24" [nzErrorTip]="errorTpl">
+          <input nz-input type="password" formControlName="checkPassword" id="checkPassword" nzSize="large"/>
+          <ng-template #errorTpl let-control>
+            @if (control.errors?.['required']) {
+              Vui lòng nhập lại mật khẩu!
+            }
+            @if (control.errors?.['confirm']) {
+              Mật khẩu không giống nhau!
+            }
+          </ng-template>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label
+          [nzSm]="6"
+          [nzXs]="24"
+          nzFor="nickname"
+          nzRequired
+          nzTooltipTitle="Họ và tên"
+        >
+          <span>Họ tên</span>
+        </nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Vui lòng nhập họ tên!">
+          <input nz-input id="nickname" formControlName="nickname" nzSize="large"/>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="phoneNumber" nzRequired>Số điện thoại</nz-form-label>
+        <nz-form-control
+          [nzSm]="14"
+          [nzXs]="30"
+          [nzValidateStatus]="validateForm.controls['phoneNumber']"
+          nzErrorTip="Vui lòng nhập số điện thoại!"
+        >
+          <nz-input-group [nzAddOnBefore]="addOnBeforeTemplate">
+            <ng-template #addOnBeforeTemplate>
+              <nz-select formControlName="phoneNumberPrefix" class="phone-select" >
+                <nz-option nzLabel="+84" nzValue="+84"></nz-option>
+              </nz-select>
+            </ng-template>
+            <input formControlName="phoneNumber" id="'phoneNumber'" nz-input nzSize="large"/>
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="phoneNumber" nzRequired>Tính năng</nz-form-label>
+        <nz-checkbox-wrapper style="width: 100%;" (nzOnChange)="selectScreen($event)" class="d-flex">
+          <div nz-row *ngFor="let menu of listOfMenu">
+            <div nz-col>
+              <label nz-checkbox nzValue={{menu.screenId}}>{{menu.screenName}}</label>
+            </div>
+          </div>
+        </nz-checkbox-wrapper>
+      </nz-form-item>
+    </form>
+  </div>
+  <div *nzModalFooter>
+    <button nz-button nzType="default" (click)="handleCancel()">Huỷ</button>
+    <button nz-button nzType="primary" (click)="submitForm()" [nzLoading]="isOkLoading">Thêm mới</button>
+  </div>
+</nz-modal>

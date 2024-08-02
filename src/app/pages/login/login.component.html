@@ -1,0 +1,33 @@
+<div class="container-login d-flex align-items-center">
+  <img class="col-md-9" src="https://bizflyportal.mediacdn.vn/bizflyportal/2700/13429/2023/06/07/00/23/quan-ly-nhan-vien-tu-xa-4-16860505928961.png" style="height: 100vh;"/>
+  <form nz-form [formGroup]="validateForm" class="login-form col-md-3 ms-5" (ngSubmit)="submitForm()">
+    <nz-form-item>
+      <nz-form-control nzErrorTip="Please enter your Username!" nzRequired>
+        <nz-input-group nzPrefixIcon="user">
+          <input type="text" nz-input formControlName="userName" placeholder="Username" />
+        </nz-input-group>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-control nzErrorTip="Please enter your Password!" nzRequired>
+        <nz-input-group nzPrefixIcon="lock">
+          <input type="password" nz-input formControlName="password" placeholder="Password" />
+        </nz-input-group>
+      </nz-form-control>
+    </nz-form-item>
+    <div nz-row class="login-form-margin">
+      <div nz-col [nzSpan]="12">
+        <label nz-checkbox formControlName="remember">
+          <span>Remember me</span>
+        </label>
+      </div>
+      <div nz-col [nzSpan]="12">
+        <a class="login-form-forgot">Forgot password</a>
+      </div>
+    </div>
+    <button nz-button class="login-form-button login-form-margin" [nzType]="'primary'">Log in</button>
+    Or
+    <a>register now!</a>
+  </form>
+</div>
+
