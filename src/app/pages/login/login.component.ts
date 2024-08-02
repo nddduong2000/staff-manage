@@ -4,6 +4,7 @@ import { AuthService } from '../../_services/auth.service';
 import { Router } from '@angular/router';
 import { Staff } from '../../_model/staff';
 import { DataService } from '../../_services/data.service';
+import { NzMessageService } from 'ng-zorro-antd/message';
 
 @Component({
   selector: 'app-login',
@@ -18,7 +19,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private data: DataService,
-    private router: Router
+    private router: Router,
+    private message: NzMessageService
   ) {}
   ngOnInit() {
     this.validateForm = this.fb.group({
@@ -36,11 +38,16 @@ export class LoginComponent implements OnInit {
   submitForm() {
     this.isOkLoading = true;
     if (this.validateForm.valid) {
+      console.log(this.listOfData, '----listOfData');
       const account = this.listOfData.filter(
         (el) => el.user === this.f.userName.value
       );
-      localStorage.setItem('accountUser', JSON.stringify(account[0]));
-      this.router.navigate(['/dashboard']);
+      if (account.length > 0) {
+        localStorage.setItem('accountUser', JSON.stringify(account[0]));
+        this.router.navigate(['/dashboard']);
+      } else {
+        this.message.create('error', `Tài khoản không tồn tại trên hệ thống. Vui lòng đăng nhập lại!`);
+      }
     } else {
       Object.values(this.validateForm.controls).forEach((control: any) => {
         if (control.invalid) {
