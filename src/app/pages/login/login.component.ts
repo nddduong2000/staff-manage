@@ -38,7 +38,6 @@ export class LoginComponent implements OnInit {
   submitForm() {
     this.isOkLoading = true;
     if (this.validateForm.valid) {
-      console.log(this.listOfData, '----listOfData');
       const account = this.listOfData.filter(
         (el) => el.user === this.f.userName.value
       );

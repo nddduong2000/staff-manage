@@ -19,8 +19,6 @@ export class AuthGuard implements CanActivate {
     const currentUser = this.authService.currentUserValue;
     const expectedRole = route.data['expectedRole'];
     const role = Object.values(currentUser.role);
-    console.log(role, '---role');
-    
     if (currentUser) {
       if (expectedRole) {
         if (!this.isAdminAccount(currentUser) && role.indexOf(expectedRole) === -1) {
