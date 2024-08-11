@@ -5,6 +5,7 @@ import { StaffInfoManagementComponent } from './staff-info-management/staff-info
 import { MenuManageComponent } from './menu-manage/menu-manage.component';
 import { TestPermissionComponent } from './test-permission/test-permission.component';
 import { AuthGuard } from '../../_helpers/auth.guard';
+import { SendEmailComponent } from './send-email/send-email.component';
 
 const routes: Routes = [
   {
@@ -28,6 +29,12 @@ const routes: Routes = [
         component: TestPermissionComponent,
         canActivate: [AuthGuard],
         data: { expectedRole: 'chatluong' },
+      },
+      {
+        path: 'send_email',
+        component: SendEmailComponent,
+        canActivate: [AuthGuard],
+        data: { expectedRole: 'sendemail' },
       },
     ],
   },

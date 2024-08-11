@@ -13,6 +13,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MenuManageComponent } from './menu-manage/menu-manage.component';
 import { TestPermissionComponent } from './test-permission/test-permission.component';
+import { SendEmailComponent } from './send-email/send-email.component';
 
 @NgModule({
   imports: [
@@ -30,6 +31,7 @@ import { TestPermissionComponent } from './test-permission/test-permission.compo
     StaffInfoManagementComponent,
     MenuManageComponent,
     TestPermissionComponent,
+    SendEmailComponent,
   ],
   exports: [
     WelcomeComponent,

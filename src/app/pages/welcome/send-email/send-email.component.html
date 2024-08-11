@@ -1,0 +1,54 @@
+<h2>Danh sách nhân viên</h2>
+
+<button nz-button nzType="primary" nzGhost (click)="openModal()" class="mt-2">
+    Gửi email
+</button>
+
+<nz-table #sortTable [nzData]="listOfData" nzTableLayout="fixed" class="mt-5"
+    (nzCurrentPageDataChange)="onCurrentPageDataChange($event)">
+    <thead>
+        <tr>
+            <th [nzSelections]="listOfColumn" [(nzChecked)]="checked" [nzIndeterminate]="indeterminate"
+                (nzCheckedChange)="onAllChecked($event)"></th>
+            <th *ngFor="let column of listOfColumn">
+                {{ column.text }}
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let data of sortTable.data">
+            <td [nzChecked]="setOfCheckedEmail.has(data.email)" (nzCheckedChange)="onItemChecked(data.email, $event)"></td>
+            <td>{{ data.nickname }}</td>
+            <td>{{ data.user }}</td>
+            <td>{{ data.email }}</td>
+            <td>{{ data.phoneNumber }}</td>
+            <td>{{ data.password }}</td>
+        </tr>
+    </tbody>
+</nz-table>
+
+
+<nz-modal [(nzVisible)]="isVisible" nzTitle="The first Modal" (nzOnCancel)="closeModal()" (nzOnOk)="sendMail()">
+    <ng-container *nzModalContent>
+        <form nz-form [formGroup]="formMail">
+            <nz-form-item>
+                <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="user">Chủ đề</nz-form-label>
+                <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Vui lòng nhập chủ đề của Mail!">
+                  <input nz-input formControlName="subject" placeholder="Chủ đề Mail" id="user" nzSize="default" />
+                </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+                <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="user">Nội dung</nz-form-label>
+                <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Vui lòng nhập nội dung của Mail!">
+                  <textarea nz-input placeholder="Nội dung Mail" formControlName="content" nzAutosize></textarea>
+                </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+                <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="user">Thời gian</nz-form-label>
+                <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Vui lòng nhập nội dung của Mail!">
+                  <nz-input-number formControlName="time" [nzMin]="1" [nzMax]="60" [nzStep]="1"></nz-input-number>
+                </nz-form-control>
+            </nz-form-item>
+        </form>
+    </ng-container>
+  </nz-modal>
